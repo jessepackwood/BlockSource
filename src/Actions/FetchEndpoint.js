@@ -4,7 +4,7 @@ import {
   ENDPOINT_HAS_ERRORED
 } from '../Utils/ActionTypes'
 
-export default const FetchEndpoint = (url) => {
+export const FetchEndpoint = (url) => {
   return dispatch => {
 
     dispatch({ type: ENDPOINT_IS_LOADING });
