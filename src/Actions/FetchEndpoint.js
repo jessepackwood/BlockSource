@@ -2,21 +2,15 @@ import {
   ENDPOINT_IS_LOADING,
   ENDPOINT_LOAD_SUCCESS,
   ENDPOINT_HAS_ERRORED
-} from '../Utils/ActionTypes'
+} from "../Utils/ActionTypes";
 
-export const FetchEndpoint = (url) => {
-  return dispatch => {
-
-    dispatch({ type: ENDPOINT_IS_LOADING });
-
-    return fetch(`${url}`)
-      .then(res => res.json())
-      .then(endpoint => {
-        return dispatch({ type: ENDPOINT_LOAD_SUCCESS, endpoint });
-      })
-      .catch((err) => {
-        return dispatch({ type: ENDPOINT_HAS_ERRORED, err });
-      });
-
-  };
-}
+export const FetchEndpoint = (url) => async (dispatch) => {
+  dispatch({ type: ENDPOINT_IS_LOADING });
+  try {
+    const res = await fetch(`${url}`);
+    const endpoint = await res.json();
+    dispatch({ type: ENDPOINT_LOAD_SUCCESS, endpoint });
+  } catch (err) {
+    dispatch({ type: ENDPOINT_HAS_ERRORED, err });
+  }
+};
