@@ -7,7 +7,7 @@ import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import RootReducer from './Reducers';
+import RootReducer from './reducers';
 
 const devTools =
   window.__REDUX_DEVTOOLS_EXTENSION__
