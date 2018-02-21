@@ -11,7 +11,7 @@ const initialState = {
   endpointError: null
 };
 
-const FetchReducer = (state = initialState, action) => {
+const fetchReducer = (state = initialState, action) => {
   console.log(action)
   switch (action.type) {
     case ENDPOINT_IS_LOADING:
@@ -40,4 +40,4 @@ const FetchReducer = (state = initialState, action) => {
   }
 };
 
-export default FetchReducer;
+export default fetchReducer;

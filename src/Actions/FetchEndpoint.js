@@ -2,7 +2,7 @@ import {
   ENDPOINT_IS_LOADING,
   ENDPOINT_LOAD_SUCCESS,
   ENDPOINT_HAS_ERRORED
-} from "../Utils/ActionTypes";
+} from "../utils/actionTypes";
 
 export const FetchEndpoint = (url) => async (dispatch) => {
   dispatch({ type: ENDPOINT_IS_LOADING });
