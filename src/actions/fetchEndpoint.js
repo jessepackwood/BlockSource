@@ -6,6 +6,7 @@ import {
 
 export const fetchEndpoint = (url) => async (dispatch) => {
   dispatch({ type: ENDPOINT_IS_LOADING });
+  
   try {
     const res = await fetch(`${url}`);
     const endpoint = await res.json();
@@ -13,4 +14,5 @@ export const fetchEndpoint = (url) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: ENDPOINT_HAS_ERRORED, err });
   }
+
 };
