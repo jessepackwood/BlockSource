@@ -2,7 +2,7 @@ import {
   ENDPOINT_IS_LOADING,
   ENDPOINT_LOAD_SUCCESS,
   ENDPOINT_HAS_ERRORED
-} from '../Utils/ActionTypes'
+} from '../utils/actionTypes'
 
 const initialState = {
   endpointIsLoading: false,
@@ -11,7 +11,7 @@ const initialState = {
   endpointError: null
 };
 
-const FetchReducer = (state = initialState, action) => {
+const fetchReducer = (state = initialState, action) => {
   console.log(action)
   switch (action.type) {
     case ENDPOINT_IS_LOADING:
@@ -40,4 +40,4 @@ const FetchReducer = (state = initialState, action) => {
   }
 };
 
-export default FetchReducer;
+export default fetchReducer;
