@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Welcome from '../Welcome/Welcome';
+import Login from '../../containers/Login/Login';
+import PropTypes from 'prop-types';
 
 
 const Routes = () => {
@@ -9,6 +11,9 @@ const Routes = () => {
       <Switch>
         <Route
           exact path ='/' component={Welcome}
+        />
+        <Route
+          path = '/login' component={Login}
         />
       </Switch>
     </div>
