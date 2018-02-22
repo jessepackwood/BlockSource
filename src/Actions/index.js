@@ -1,3 +1,3 @@
-import FetchEndpoint from "./FetchEndpoint";
+import fetchEndpoint from "./fetchEndpoint";
 
-export { FetchEndpoint };
+export { fetchEndpoint };

@@ -12,7 +12,6 @@ const initialState = {
 };
 
 const fetchReducer = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
     case ENDPOINT_IS_LOADING:
       return {

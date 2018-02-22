@@ -4,7 +4,7 @@ import {
   ENDPOINT_HAS_ERRORED
 } from "../utils/actionTypes";
 
-export const FetchEndpoint = (url) => async (dispatch) => {
+export const fetchEndpoint = (url) => async (dispatch) => {
   dispatch({ type: ENDPOINT_IS_LOADING });
   try {
     const res = await fetch(`${url}`);
