@@ -11,8 +11,10 @@ const initialState = {
   endpointError: null
 };
 
+
+
 const fetchReducer = (state = initialState, action) => {
-  switch (action.type) {
+switch (action.type) {
     case ENDPOINT_IS_LOADING:
       return {
         endpointIsLoading: true,
