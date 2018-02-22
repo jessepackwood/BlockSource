@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 export class Header extends Component {
@@ -6,7 +7,9 @@ export class Header extends Component {
     return (
       <div className='header-component'>
         <h1 className='app-title'>BlockSource</h1>
-
+        <Link to ='/login' >
+          <button>Login</button>
+        </Link>
       </div>
     )
   }
