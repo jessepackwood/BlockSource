@@ -1,7 +1,8 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Welcome from '../Welcome/Welcome';
 import Login from '../../containers/Login/Login';
+import ProjectForm from '../../containers/ProjectForm/ProjectForm';
 import PropTypes from 'prop-types';
 
 
@@ -14,6 +15,9 @@ const Routes = () => {
         />
         <Route
           path = '/login' component={Login}
+        />
+        <Route
+          path = '/create' component={ProjectForm}
         />
       </Switch>
     </div>

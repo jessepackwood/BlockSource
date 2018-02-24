@@ -6,10 +6,17 @@ export class Header extends Component {
   render() {
     return (
       <div className='header-component'>
-        <h1 className='app-title'>BlockSource</h1>
-        <Link to ='/login' >
-          <button>Login</button>
+        <Link to='/create'>
+          <button className='button'>Start a project</button>
         </Link>
+        <h1 className='app-title'>BlockSource</h1>
+        <h4 className='app-subtitle'>Crowdfunding on the blockchain</h4>
+        <div className='search-login-container'>
+          <input type='text' className='header-search'/>
+          <Link to ='/login' >
+            <button className='button btn-login'>Sign in</button>
+          </Link>
+        </div>
       </div>
     )
   }
