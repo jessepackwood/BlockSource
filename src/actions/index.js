@@ -35,3 +35,19 @@ export const createUserError = () => {
     type: 'CREATE_USER_ERROR'
   }
 }
+
+/*----------------- Search Actions --------------------------- */
+
+export const searchInputChange = (searchInput) => {
+  return {
+    type: 'SEARCH_CHANGE',
+    searchInput
+  }
+}
+
+export const clearSearchInput = () => {
+  return {
+    type: 'SEARCH_CLEAR',
+    searchInput: ''
+  }
+}
