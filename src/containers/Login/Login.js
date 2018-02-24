@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Login.scss';
-import * as actions from '../../actions/fetchEndpoint'
+import * as actions from '../../actions'
 import PropTypes from 'prop-types'
 
 
@@ -12,7 +12,7 @@ export class Login extends Component {
     const {name, value} = event.target
     this.props.inputChange(name, value)
   }
-  
+
   render() {
     return (
       <div className='login-page'>
@@ -39,8 +39,8 @@ export class Login extends Component {
 
 export const mapStateToProps = store => {
   return {
-    email: store.user.email,
-    password: store.user.password
+    email: store.email,
+    password: store.password
   }
 }
 
