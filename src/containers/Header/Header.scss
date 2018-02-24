@@ -1,9 +1,39 @@
 @import '../../style/variable.scss';
 
 .app-title {
+  font-family: $header-font;
+  text-align: center;
+  margin: 0 auto;
+}
 
+.app-subtitle {
+  text-align: center;
 }
 
 .header-component {
-  font-family: $header-font;
+  position: relative;
+  padding: 20px;
+}
+
+.search-login-container {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.header-search {
+  background: url('../../assets/magnifier-tool.png');
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: 5px 2px;
+}
+
+.button {
+  outline: none;
+  border: none;
+  &:hover{
+    cursor: pointer;
+  }
 }
