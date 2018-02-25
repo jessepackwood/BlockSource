@@ -42,9 +42,9 @@ app.get('/api/v1/projects/:id', (request, response) => {
     .then((project) => {
       if (!project) {
         response.status(404).json({ error: 'Not Found'});
-      } else {
-        response.status(200).json(project);
       }
+
+      response.status(200).json(project);
     })
     .catch((error) => {
       response.status(422).json({ error });
@@ -54,26 +54,26 @@ app.get('/api/v1/projects/:id', (request, response) => {
 app.get('/api/v1/contributors/:id/projects', (request, response) => {
   const { id } = request.params;
 
-  database('projects_contributors').where('contributors_id', id).select()
-    .then((junctions) => {
-      if (!junctions) {
-        response.status(404).json({ error: "Not Found" });
-      } else {
-        response.status(200).json(junctions);
-      }
+  database("projects")
+    .join("projects_contributors", "projects_contributors.projects_id", "=", "projects.id")
+    .where("projects_contributors.contributors_id", request.params.id)
+    .select()
+    .then(projects => response.status(200).json(projects))
+    .catch(error => {
+      response.status(500).json({ error });
     });
 });
 
 app.get('/api/v1/projects/:id/contributors', (request, response) => {
   const { id } = request.params;
 
-  database('projects_contributors').where('projects_id', id).select()
-    .then((junctions) => {
-      if (!junctions) {
-        response.status(404).json({ error: "Not Found" });
-      } else {
-        response.status(200).json(junctions);
-      }
+  database("contributors")
+    .join("projects_contributors", "projects_contributors.contributors_id", "=", "constributors.id")
+    .where("projects_contributors.projects_id", request.params.id)
+    .select()
+    .then(contributors => response.status(200).json(contributors))
+    .catch(error => {
+      response.status(500).json({ error });
     });
 });
 
