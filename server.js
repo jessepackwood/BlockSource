@@ -38,7 +38,7 @@ app.get('/api/v1/contributors/:id', (request, response) => {
 app.get('/api/v1/projects/:id', (request, response) => {
   const { id } = request.params;
 
-  database('contributors').where({ id }).first()
+  database('projects').where({ id }).first()
     .then((project) => {
       if (!project) {
         response.status(404).json({ error: 'Not Found'});
