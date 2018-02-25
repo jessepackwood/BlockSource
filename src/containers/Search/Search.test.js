@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import * as actions from '../../actions'
 import { Search, mapStateToProps, mapDispatchToProps } from './Search';
 
 describe('Search tests', () => {
@@ -25,15 +26,19 @@ describe('Search tests', () => {
   })
 
   describe('mapStateToProps tests', () => {
-    it.skip('should pull projects from the store', () => {
-      const mockSearchInput = {value: 'bit'}
+    it('should pull projects from the store', () => {
+      const mockSearchInput = {value: 'hoverboard'}
       const mockStore = {
         projects: mockProjects,
         searchInput: mockSearchInput.value
       };
-      const result = mapStateToProps(mockStore);
 
-      expect(result.projects).toEqual(mockStore.projects);
+      actions.searchInputChange('hoverboard')
+      const result = mapStateToProps(mockStore);
+      console.log(mockStore)
+      console.log(result)
+
+      expect(result.projects).toEqual(mockStore.projects[0]);
     });
   });
 

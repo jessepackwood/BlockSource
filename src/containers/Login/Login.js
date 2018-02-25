@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './Login.scss';
+import './Login.css';
 import * as actions from '../../actions'
 import PropTypes from 'prop-types'
 
@@ -31,7 +31,9 @@ export class Login extends Component {
             placeholder='Password'
             value={this.props.password || ''}
           />
+          <button className='btn-sign-in'>Sign In</button>
         </div>
+
       </div>
     )
   }
