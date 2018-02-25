@@ -18,7 +18,8 @@ export const Search = ({ inputChange }) => {
 }
 
 export const mapStateToProps = store => ({
-  searchInput: store.searchInput
+  searchInput: store.searchInput,
+  projects: store.projects
 })
 
 export const mapDispatchToProps = dispatch => {
