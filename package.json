@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
+    "start": "npm-run-all -p watch-css start-js && nodemon server.js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "frontTest": "react-scripts test --env=jsdom",
