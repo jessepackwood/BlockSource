@@ -122,6 +122,26 @@ app.post("/api/v1/project/", (request, response) => {
     .catch(error => response.status(404).json({ error }));
 });
 
+app.post("/api/v1/contributor/", (request, response) => {
+  const contributor = request.body;
+
+  for (const requiredParams of [
+    "name",
+    "bio"
+  ]) {
+    if (!contributor[requiredParams]) {
+      return response.status(422).json({
+        error: `You are missing ${requiredParams}`
+      });
+    }
+  }
+
+  database("contributors")
+    .insert(contributor, "id")
+    .then(project => response.status(201).json({ id: project[0] }))
+    .catch(error => response.status(404).json({ error }));
+});
+
 app.post("/api/v1/projects_contributors/project/", (request, response) => {
   const junction = request.body;
 
