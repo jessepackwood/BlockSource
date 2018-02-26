@@ -10,7 +10,7 @@ import './App.css';
 export class App extends Component {
   render() {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+      <MuiThemeProvider>
         <div className="app">
           <Header/>
           <Routes />
