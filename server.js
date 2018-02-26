@@ -159,10 +159,16 @@ app.post("/api/v1/projects_contributors/project/", (request, response) => {
   }
 
   database("projects_contributors")
-    .insert(junction)
-    .returning("project_id")
+    .insert(junction, 'projects_id')
     .then((project) => response.status(201).json({ id: project[0] }))
     .catch(error => response.status(404).json({ error }));
+
+  database("projects")
+    .where('id', "=", junction.projects_id)
+    .increment("fund_amount", junction.contribution_amount)
+    .catch(error => {
+      response.status(422).json({ error });
+    });
 });
 
 
