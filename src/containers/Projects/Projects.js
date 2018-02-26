@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import './Projects.css';
 
 class Projects extends Component {
@@ -6,6 +7,7 @@ class Projects extends Component {
     return (
       <div className='projects-component'>
         Projects
+        <Card/>
       </div>
     )
   }

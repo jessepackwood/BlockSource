@@ -1,1 +1,1 @@
-web: npm-run-all && node server.js
+web: npm start

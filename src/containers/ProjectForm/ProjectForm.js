@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import RaisedButton from 'material-ui/RaisedButton';
+
 import './ProjectForm.css'
 
 export default class projectForm extends Component {
@@ -44,6 +47,7 @@ export default class projectForm extends Component {
             />
         </div>
       </div>
+        <RaisedButton label='default'/>
         <button className='button btn-create'>Create</button>
     </div>
     )
