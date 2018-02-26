@@ -15,9 +15,9 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 app.locals.title = 'BlockSource';
 
-app.get('/', (request, response) => {
-  response.send('BlockSource!');
-});
+// app.get('/', (request, response) => {
+//   response.send('BlockSource!');
+// });
 
 app.get('/api/v1/contributors/:id', (request, response) => {
   const { id } = request.params;
