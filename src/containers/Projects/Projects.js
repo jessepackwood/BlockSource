@@ -8,11 +8,44 @@ class Projects extends Component {
   componentDidMount() {
     //fetch projects
     //map over projects and return cards
+
   }
+
+  mapProjects() {
+    console.log('mapping')
+    const projects =
+      [{
+        title: 'Project One',
+        description: 'The first project',
+        goalAmount: '5000',
+        fundAmount: '1000'
+      }]
+
+      return projects.map( (project, index) => {
+        console.log(project)
+        return <Card 
+                  key={index}
+                >
+
+                  <CardTitle 
+                    title={project.title}
+                    subtitle={`Goal Amount: ${project.goalAmount} Fund Amount: ${project.fundAmount}`}
+                  />
+                  <CardHeader
+                    actAsExpander={true}
+                    showExpandableButton={true}
+                  />
+                  <CardText expandable={true}>
+                    {project.description}
+                  </CardText>
+                </Card>
+      })
+    }
 
   render() {
     return (
       <div className='projects-component'>
+        {this.mapProjects()}
         <Card>
           <CardTitle title="Card title" subtitle="Card subtitle" />
           <CardText>
