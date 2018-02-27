@@ -91,7 +91,7 @@ app.get("/api/v1/projects/:id/contributors", (request, response) => {
   const { id } = request.params;
 
   database("contributors")
-    .join("projects_contributors", "projects_contributors.contributors_id", "=", "constributors.id")
+    .join("projects_contributors", "projects_contributors.contributors_id", "=", "contributors.id")
     .where("projects_contributors.projects_id", request.params.id)
     .select()
     .then(contributors => response.status(200).json(contributors))
@@ -103,7 +103,7 @@ app.get("/api/v1/projects/:id/contributors", (request, response) => {
 app.post("/api/v1/project/", (request, response) => {
   const project = request.body;
 
-  for (const requiredParams of [
+  for (const requiredParams of [ 
     "title",
     "goal_amount",
     "fund_amount",
