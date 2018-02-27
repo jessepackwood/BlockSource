@@ -56,6 +56,13 @@ export const createUserError = () => {
   };
 };
 
+export const inputChange = (name, value) => {
+  return {
+    type: `LOGIN_${name.toUpperCase()}_CHANGE`,
+    value
+  }
+}
+
 /*----------------- Search Actions --------------------------- */
 
 export const searchInputChange = (searchInput) => {

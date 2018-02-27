@@ -13,6 +13,9 @@
   text-align: right;
   margin-right: 25px; }
 
+.project-input-label.goal-label {
+  margin-top: 19px; }
+
 .project-inputs {
   display: flex;
   flex-direction: column; }

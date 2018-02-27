@@ -27,9 +27,10 @@ export class ProjectForm extends Component {
       <div className='project-form-container'>
         <div className='project-form'>
           <div className='input-labels'>
-            <span className='project-input-label'>Title</span>
-            <span className='project-input-label'>Description</span>
-            <span className='project-input-label'>Goal</span>
+            <span className='project-input-label title-label'>Title</span>
+            <span className='project-input-label description-label'>Description</span>
+            <span className='project-input-label goal-label'>Goal</span>
+            <span className='project-input-label fund-label'>Current Funding</span>
           </div>
           <div className='project-inputs'>
             <input 
@@ -65,7 +66,8 @@ export class ProjectForm extends Component {
           </div>
         </div>
         <FlatButton 
-          label='submit' 
+          label='submit'
+          color='primary'
           onClick={
             ()=> this.props.formChange(
                   this.state.title, 

@@ -33,9 +33,6 @@ describe('Search tests', () => {
 
       actions.searchInputChange('hoverboard');
       const result = mapStateToProps(mockStore);
-      console.log(mockStore);
-      console.log(result);
-
       expect(result.projects).toEqual(mockStore.projects[0]);
     });
   });
