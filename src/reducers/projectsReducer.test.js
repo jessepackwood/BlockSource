@@ -12,4 +12,10 @@ describe('projectsReducer tests', () => {
     expect(projectsReducer(undefined, actions)).toEqual(expected);
   });
 
+  it('should return a new state with contributors', () => {
+    const projects = [{ title: "Project 1" }, { title: 'Project 2' }];
+    const expected = projects;
+    expect(projectsReducer(undefined, actions.setProjects(projects))).toEqual(expected);
+  });
+
 });
