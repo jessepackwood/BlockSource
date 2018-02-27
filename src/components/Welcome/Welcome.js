@@ -8,7 +8,7 @@ const Welcome = () => {
     <div className='welcome-page'>
       <Projects />
     </div>
-    )
-}
+  );
+};
 
 export default Welcome;

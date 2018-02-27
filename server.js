@@ -131,7 +131,9 @@ app.get("/api/v1/projects/:id/contributors", (request, response) => {
     });
 });
 
-app.post("/api/v1/projects/", (request, response) => {
+
+app.post("/api/v1/projects", (request, response) => {
+
   const project = request.body;
 
   for (const requiredParams of [
@@ -153,7 +155,9 @@ app.post("/api/v1/projects/", (request, response) => {
     .catch(error => response.status(404).json({ error }));
 });
 
-app.post("/api/v1/contributors/", (request, response) => {
+
+app.post("/api/v1/contributors", (request, response) => {
+
   const contributor = request.body;
 
   for (const requiredParams of ["name", "bio"]) {
