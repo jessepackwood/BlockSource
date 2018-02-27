@@ -25,4 +25,17 @@ describe('All actions', () => {
     })
 
   })
+
+  describe('Fetch actions', () => {
+
+    it('setProjects should return have a type of SET_PROJECTS', () => {
+      const projects = [{title: 'Project 1'}, {title: 'Project 2'}]
+      const expected = {
+        type: 'SET_PROJECTS',
+        projects
+      }
+      expect(actions.setProjects(projects)).toEqual(expected)
+    })
+
+  })
 })

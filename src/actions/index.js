@@ -9,25 +9,12 @@ export const projectsEndpoint = () => async (dispatch) => {
     dispatch(setProjects(projects));
 };
 
-// export const loadingProjects = () => {
-//   return {
-//     type: 'PROJECTS_IS_LOADING'
-//   }
-// }
-
 export const setProjects = (projects) => {
   return {
-    type: 'PROJECTS_SUCCESS',
+    type: 'SET_PROJECTS',
     projects
   }
-}
-
-// export const projectsError = (error) => {
-//   return {
-//     type: 'PROJECTS_ERROR',
-//     error
-//   }
-// }
+};
 
 export const contributorsEndpoint = (id) => async (dispatch) => {
   const contributors = await fetchProjectContributors(id);
@@ -39,7 +26,7 @@ export const setProjectContributors = (contributors) => {
     type: 'SET_CONTRIBUTORS',
     contributors
   }
-}
+};
 
 /*------------------ Login actions --------------------------- */
 
@@ -49,19 +36,19 @@ export const createUser = (email, password) => async (dispatch) => {
   }).catch((error) => {
     dispatch(createUserError(error))
   })
-}
+};
 
 export const createUserSuccess = () => {
   return {
     type: 'CREATE_USER_SUCCESS'
   }
-}
+};
 
 export const createUserError = () => {
   return {
     type: 'CREATE_USER_ERROR'
   }
-}
+};
 
 /*----------------- Search Actions --------------------------- */
 
@@ -70,26 +57,12 @@ export const searchInputChange = (searchInput) => {
     type: 'SEARCH_CHANGE',
     searchInput
   }
-}
+};
 
 export const clearSearchInput = () => {
   return {
     type: 'SEARCH_CLEAR',
     searchInput: ''
   }
-}
+};
 
-/*----------------- fetch Actions --------------------------- */
-
-
-// export const fetchProjects = (projects) => async (dispatch) => {
-//   const coins = await fetchStoredProjects();
-//   dispatch(setProjects(projects))
-// }
-
-// export const setProjects = (projects) => {
-//   return {
-//     type: 'SET_PROJECTS',
-//     projects
-//   }
-// }
