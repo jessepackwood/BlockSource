@@ -25,7 +25,7 @@ export class Projects extends Component {
         fundAmount: '1000'
       }]
 
-      return this.projects.map( (project, index) => {
+      return this.props.projects.map( (project, index) => {
         return <Card 
                   key={index}
                 >
