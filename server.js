@@ -38,7 +38,6 @@ app.get("/api/v1/contributors/:id", (request, response) => {
 });
 
 app.get("/api/v1/projects", (request, response) => {
-  const { id } = request.params;
 
   database("projects")
     .select()
@@ -79,7 +78,7 @@ app.get("/api/v1/contributors/:id/projects", (request, response) => {
 
   database("projects")
     .join("projects_contributors", "projects_contributors.projects_id", "=", "projects.id")
-    .where("projects_contributors.contributors_id", request.params.id)
+    .where("projects_contributors.contributors_id", id)
     .select()
     .then(projects => response.status(200).json(projects))
     .catch(error => {
@@ -92,7 +91,7 @@ app.get("/api/v1/projects/:id/contributors", (request, response) => {
 
   database("contributors")
     .join("projects_contributors", "projects_contributors.contributors_id", "=", "contributors.id")
-    .where("projects_contributors.projects_id", request.params.id)
+    .where("projects_contributors.projects_id", id)
     .select()
     .then(contributors => response.status(200).json(contributors))
     .catch(error => {
