@@ -38,6 +38,11 @@ ShallowWrapper {
                 type="password"
                 value=""
         />
+        <button
+                className="btn-sign-in"
+        >
+                Sign In
+        </button>
 </div>,
       "className": "login-page",
     },
@@ -62,6 +67,11 @@ ShallowWrapper {
             type="password"
             value=""
 />,
+          <button
+            className="btn-sign-in"
+>
+            Sign In
+</button>,
         ],
         "className": "login-inputs",
       },
@@ -97,6 +107,18 @@ ShallowWrapper {
           "rendered": null,
           "type": "input",
         },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Sign In",
+            "className": "btn-sign-in",
+          },
+          "ref": null,
+          "rendered": "Sign In",
+          "type": "button",
+        },
       ],
       "type": "div",
     },
@@ -125,6 +147,11 @@ ShallowWrapper {
                     type="password"
                     value=""
           />
+          <button
+                    className="btn-sign-in"
+          >
+                    Sign In
+          </button>
 </div>,
         "className": "login-page",
       },
@@ -149,6 +176,11 @@ ShallowWrapper {
               type="password"
               value=""
 />,
+            <button
+              className="btn-sign-in"
+>
+              Sign In
+</button>,
           ],
           "className": "login-inputs",
         },
@@ -183,6 +215,18 @@ ShallowWrapper {
             "ref": null,
             "rendered": null,
             "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Sign In",
+              "className": "btn-sign-in",
+            },
+            "ref": null,
+            "rendered": "Sign In",
+            "type": "button",
           },
         ],
         "type": "div",

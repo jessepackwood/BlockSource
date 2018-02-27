@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 import { auth } from '../services/firebase'
-import { fetchStoredProjects } from '../services/api'
+import { fetchStoredProjects, fetchProjectContributors } from '../services/api'
 
 /*------------------ Fetch Endpoints --------------------------- */
 
@@ -28,6 +28,18 @@ export const setProjects = (projects) => {
 //     error
 //   }
 // }
+
+export const contributorsEndpoint = (id) => async (dispatch) => {
+  const contributors = await fetchProjectContributors(id);
+  dispatch(setProjectContributors(contributors))
+}
+
+export const setProjectContributors = (contributors) => {
+  return {
+    type: 'SET_CONTRIBUTORS',
+    contributors
+  }
+}
 
 /*------------------ Login actions --------------------------- */
 
