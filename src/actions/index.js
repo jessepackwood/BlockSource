@@ -1,18 +1,33 @@
 import firebase from 'firebase'
 import { auth } from '../services/firebase'
+import { fetchStoredProjects } from '../services/api'
 
 /*------------------ Fetch Endpoints --------------------------- */
 
-export const fetchEndpoint = (url) => async (dispatch) => {
-  dispatch({ type: 'ENDPOINT_IS_LOADING' });
-  try {
-    const res = await fetch(`${url}`);
-    const endpoint = await res.json();
-    dispatch({ type: 'ENDPOINT_LOAD_SUCCESS', endpoint });
-  } catch (error) {
-    dispatch({ type: 'ENDPOINT_HAS_ERRORED', error });
-  }
+export const projectsEndpoint = () => async (dispatch) => {
+    const projects = await fetchStoredProjects();
+    dispatch(setProjects(projects));
 };
+
+// export const loadingProjects = () => {
+//   return {
+//     type: 'PROJECTS_IS_LOADING'
+//   }
+// }
+
+export const setProjects = (projects) => {
+  return {
+    type: 'PROJECTS_SUCCESS',
+    projects
+  }
+}
+
+// export const projectsError = (error) => {
+//   return {
+//     type: 'PROJECTS_ERROR',
+//     error
+//   }
+// }
 
 /*------------------ Login actions --------------------------- */
 
@@ -51,3 +66,18 @@ export const clearSearchInput = () => {
     searchInput: ''
   }
 }
+
+/*----------------- fetch Actions --------------------------- */
+
+
+// export const fetchProjects = (projects) => async (dispatch) => {
+//   const coins = await fetchStoredProjects();
+//   dispatch(setProjects(projects))
+// }
+
+// export const setProjects = (projects) => {
+//   return {
+//     type: 'SET_PROJECTS',
+//     projects
+//   }
+// }
