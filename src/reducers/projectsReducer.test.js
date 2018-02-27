@@ -4,12 +4,7 @@ import * as actions from '../actions'
 describe('projectsReducer tests', () => {
   let state;
   beforeEach( () => {
-    state = {
-      projectsIsLoading: false,
-      projectsData: [],
-      projectsHasErrored: false,
-      projectsError: null
-    }
+    state = []
   })
 
   it('should return the default state', () => {
