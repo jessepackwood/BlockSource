@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import './Projects.css';
+import { connect } from 'react-redux';
+import { projectsEndpoint } from '../../actions';
 import FlatButton from 'material-ui/FlatButton';
 
-class Projects extends Component {
-
+export class Projects extends Component {
   componentDidMount() {
-    //fetch projects
-    //map over projects and return cards
-
+    this.props.handleProjectsFetch()
   }
+
 
   mapProjects() {
     console.log('mapping')
+
+    //this.prop.projects returning undefined
+
+    console.log(this.props.projects)
     const projects =
       [{
         title: 'Project One',
@@ -21,12 +25,10 @@ class Projects extends Component {
         fundAmount: '1000'
       }]
 
-      return projects.map( (project, index) => {
-        console.log(project)
+      return this.projects.map( (project, index) => {
         return <Card 
                   key={index}
                 >
-
                   <CardTitle 
                     title={project.title}
                     subtitle={`Goal Amount: ${project.goalAmount} Fund Amount: ${project.fundAmount}`}
@@ -43,6 +45,7 @@ class Projects extends Component {
     }
 
   render() {
+
     return (
       <div className='projects-component'>
         {this.mapProjects()}
@@ -64,4 +67,16 @@ class Projects extends Component {
   }
 }
 
-export default Projects;
+const mapStateToProps = store => ({
+  projects: store.projects.projectsData
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleProjectsFetch: () => {
+      dispatch(projectsEndpoint())
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Projects);
