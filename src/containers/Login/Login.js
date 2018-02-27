@@ -48,7 +48,9 @@ export const mapStateToProps = store => {
 
 export const mapDispatchToProps = dispatch => {
   return {
-
+    inputChange: (name, value) => {
+      dispatch(actions.inputChange(name, value));
+    }
   };
 };
 
