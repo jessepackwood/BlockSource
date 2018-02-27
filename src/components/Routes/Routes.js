@@ -21,11 +21,11 @@ const Routes = () => {
         />
       </Switch>
     </div>
-  )
-}
+  );
+};
 
 Route.propTypes = {
   component: PropTypes.func
-}
+};
 
 export default Routes;

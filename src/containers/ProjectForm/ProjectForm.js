@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import RaisedButton from 'material-ui/RaisedButton';
 
-import './ProjectForm.css'
+import './ProjectForm.css';
 
 export default class projectForm extends Component {
   constructor() {
@@ -11,7 +11,7 @@ export default class projectForm extends Component {
       title: '',
       description: '',
       goal: ''
-    }
+    };
   }
 
   handleChange = (event) => {
@@ -19,7 +19,7 @@ export default class projectForm extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className='project-form-container'>
         <div className='project-form'>
           <div className='input-labels'>
@@ -45,12 +45,12 @@ export default class projectForm extends Component {
               type='text' 
               className='project-input single-input'
             />
+          </div>
         </div>
-      </div>
         <RaisedButton label='default'/>
         <button className='button btn-create'>Create</button>
-    </div>
-    )
+      </div>
+    );
   }
 
 }

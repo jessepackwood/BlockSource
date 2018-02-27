@@ -1,12 +1,12 @@
 const searchReducer = (state={value: ''}, action) => {
   switch (action.type) {
   case 'SEARCH_CHANGE':
-    return {...state, value: action.searchInput}
+    return {...state, value: action.searchInput};
   case 'SEARCH_CLEAR':
-    return state
+    return state;
   default:
-    return state
+    return state;
   }
-}
+};
 
-export default searchReducer
+export default searchReducer;
