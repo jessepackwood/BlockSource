@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
-import fetchReducer from './fetchReducer';
+import projectsReducer from './projectsReducer';
 import loginReducer from './loginReducer';
 import searchReducer from './searchReducer';
+import contributorReducer from './contributorReducer';
 
 const rootReducer = combineReducers({
-  fetchReducer, 
-  loginReducer, 
-  searchReducer
+  projects: projectsReducer, 
+  user: loginReducer, 
+  searchInput: searchReducer,
+  projectContributors: contributorReducer
 });
 
 export default rootReducer;
