@@ -6,10 +6,10 @@ describe('Projects tests', () => {
   let projectForm;
 
   beforeEach( () => {
-    projectForm = shallow(<ProjectForm />)
-  })
+    projectForm = shallow(<ProjectForm />);
+  });
 
   it('should match snapshot', () => {
-    expect(projectForm).toMatchSnapshot()
-  })
-})
+    expect(projectForm).toMatchSnapshot();
+  });
+});

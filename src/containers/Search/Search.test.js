@@ -1,6 +1,4 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import * as actions from '../../actions'
+import * as actions from '../../actions';
 import { Search, mapStateToProps, mapDispatchToProps } from './Search';
 
 describe('Search tests', () => {
@@ -12,31 +10,31 @@ describe('Search tests', () => {
   beforeEach( () => {
     mockSearchInput = 'hoverboard';
     inputChange = jest.fn();
-    mockProjects = [{title: 'hoverboard'}, {title: 'flying cars'}]
+    mockProjects = [{title: 'hoverboard'}, {title: 'flying cars'}];
 
     search = shallow(<Search 
-                        searchInput={mockSearchInput}
-                        projects={mockProjects}
-                        inputChange={inputChange}
-                      />)
-  })
+      searchInput={mockSearchInput}
+      projects={mockProjects}
+      inputChange={inputChange}
+    />);
+  });
 
   it('should match the snapshot', () => {
-    expect(search).toMatchSnapshot()
-  })
+    expect(search).toMatchSnapshot();
+  });
 
   describe('mapStateToProps tests', () => {
     it('should pull projects from the store', () => {
-      const mockSearchInput = {value: 'hoverboard'}
+      const mockSearchInput = {value: 'hoverboard'};
       const mockStore = {
         projects: mockProjects,
         searchInput: mockSearchInput.value
       };
 
-      actions.searchInputChange('hoverboard')
+      actions.searchInputChange('hoverboard');
       const result = mapStateToProps(mockStore);
-      console.log(mockStore)
-      console.log(result)
+      console.log(mockStore);
+      console.log(result);
 
       expect(result.projects).toEqual(mockStore.projects[0]);
     });
@@ -49,6 +47,6 @@ describe('Search tests', () => {
 
       result.inputChange('hoverboard');
       expect(mockDispatch).toHaveBeenCalled();
-    })
-  })
-})
+    });
+  });
+});

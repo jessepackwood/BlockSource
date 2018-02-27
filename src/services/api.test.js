@@ -1,4 +1,4 @@
-import * as apiCalls from './api'
+import * as apiCalls from './api';
 
 describe('Api Calls tests', () => {
 
@@ -13,9 +13,9 @@ describe('Api Calls tests', () => {
 
     it('should fetch the projects', async () => {
       const projects = await apiCalls.fetchStoredProjects();
-      expect(projects).toEqual(['array', 'of', 'projects'])
-    })
-  })
+      expect(projects).toEqual(['array', 'of', 'projects']);
+    });
+  });
 
   describe('Contributors fetch test', () => {
     beforeEach(() => {
@@ -28,8 +28,8 @@ describe('Api Calls tests', () => {
 
     it('should fetch contributors for each project', async () => {
       const contributors = await apiCalls.fetchProjectContributors();
-      expect(contributors).toEqual(['array', 'of', 'contributors'])
-    })
-  })
+      expect(contributors).toEqual(['array', 'of', 'contributors']);
+    });
+  });
 
-})
+});

@@ -40,7 +40,7 @@ describe('Login Container', () => {
           password: 'password',
           uid: 'uid'
         }
-      }
+      };
       result = mapStateToProps(mockStore);
     });
 
