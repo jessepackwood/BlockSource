@@ -101,23 +101,38 @@ describe('API Routes', () => {
     });
   });
 
+         //   "id": 1,
+        // "name": "Jesse",
+        // "bio": "Daredevil, Photographer, Programmer",
+        // "created_at": "2018-02-26T22:02:12.770Z",
+        // "updated_at": "2018-02-26T22:02:12.770Z",
+        // "projects_id": 1,
+        // "contributors_id": 1,
+        // "owner": true,
+        // "contribution_amount": 0
+  
   describe("GET api/v1/projects/:id/contributors", () => {
-    it("should return a single project", () => {
+    it("should return all contributors on a project", () => {
       return chai
         .request(server)
-        .get("/api/v1/projects/1")
+        .get("/api/v1/projects/1/contributors")
         .then(response => {
           response.should.have.status(200);
           response.should.be.json;
-          response.body.should.be.a("object");
-          response.body.should.have.property("title");
-          response.body.title.should.equal("Black Project");
-          response.body.should.have.property("description");
-          response.body.description.should.equal("Really really black, like so black it kills you");
-          response.body.should.have.property("goal_amount");
-          response.body.goal_amount.should.equal(50000.0);
-          response.body.should.have.property("fund_amount");
-          response.body.fund_amount.should.equal(20000.0);
+          response.body.should.be.a("array");
+          response.body[0].should.be.a("object");
+          response.body[0].should.have.property("name");
+          response.body[0].title.should.equal("Jesse");
+          response.body[0].should.have.property("bio");
+          response.body[0].description.should.equal("Daredevil, Photographer, Programmer");
+          response.body[0].should.have.property("projects_id");
+          response.body[0].projects_id.should.equal(1);
+          response.body[0].should.have.property("contributors_id");
+          response.body[0].contributors_id.should.equal(1);
+          response.body[0].should.have.property("owner");
+          response.body[0].goal_amount.should.equal(true);
+          response.body[0].should.have.property("contribution_amount");
+          response.body[0].fund_amount.should.equal(0);
         })
         .catch(error => {
           throw error;
@@ -127,11 +142,11 @@ describe('API Routes', () => {
     it("should return 404 if contributors are not found", () => {
       return chai
         .request(server)
-        .get("/api/v1/projects/720")
+        .get("/api/v1/contributors/:id/projects")
         .then(response => {
           response.should.have.status(404);
           response.should.be.json;
-          response.body.should.be.a("object");
+          response.body.should.be.a("array");
           response.body.error.should.equal("Not Found");
         })
         .catch(error => {
@@ -169,60 +184,6 @@ describe('API Routes', () => {
           response.body[0].goal_amount.should.equal(50000.0);
           response.body[0].should.have.property("fund_amount");
           response.body[0].fund_amount.should.equal(20000.0);
-          response.body[0].should.have.property("projects_id");
-          response.body[0].projects_id.should.equal(1);
-          response.body[0].should.have.property("contributors_id");
-          response.body[0].contributors_id.should.equal(1);
-          response.body[0].should.have.property("owner");
-          response.body[0].goal_amount.should.equal(true);
-          response.body[0].should.have.property("contribution_amount");
-          response.body[0].fund_amount.should.equal(0);
-        })
-        .catch(error => {
-          throw error;
-        });
-    });
-
-    it("should return 404 if contributors are not found", () => {
-      return chai
-        .request(server)
-        .get("/api/v1/contributors/:id/projects")
-        .then(response => {
-          response.should.have.status(404);
-          response.should.be.json;
-          response.body.should.be.a("array");
-          response.body.error.should.equal("Not Found");
-        })
-        .catch(error => {
-          throw error;
-        });
-    });
-  });
-
-        //   "id": 1,
-        // "name": "Jesse",
-        // "bio": "Daredevil, Photographer, Programmer",
-        // "created_at": "2018-02-26T22:02:12.770Z",
-        // "updated_at": "2018-02-26T22:02:12.770Z",
-        // "projects_id": 1,
-        // "contributors_id": 1,
-        // "owner": true,
-        // "contribution_amount": 0
-  
-  describe("GET api/v1/projects/:id/contributors", () => {
-    it("should return all contributors on a project", () => {
-      return chai
-        .request(server)
-        .get("/api/v1/contributors/1/projects")
-        .then(response => {
-          response.should.have.status(200);
-          response.should.be.json;
-          response.body.should.be.a("array");
-          response.body[0].should.be.a("object");
-          response.body[0].should.have.property("name");
-          response.body[0].title.should.equal("Jesse");
-          response.body[0].should.have.property("bio");
-          response.body[0].description.should.equal("Daredevil, Photographer, Programmer");
           response.body[0].should.have.property("projects_id");
           response.body[0].projects_id.should.equal(1);
           response.body[0].should.have.property("contributors_id");
