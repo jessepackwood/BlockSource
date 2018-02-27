@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import { auth } from '../services/firebase';
-import { fetchStoredProjects, fetchProjectContributors } from '../services/api';
+import { fetchStoredProjects, fetchProjectContributors, postProject } from '../services/api';
+
 
 /*------------------ Fetch Endpoints --------------------------- */
 
@@ -27,6 +28,11 @@ export const setProjectContributors = (contributors) => {
     contributors
   };
 };
+
+export const postNewProject = (title, description, goal_amount, fund_amount) => {
+  postProject(title, description, goal_amount, fund_amount);
+
+}
 
 /*------------------ Login actions --------------------------- */
 
@@ -65,4 +71,6 @@ export const clearSearchInput = () => {
     searchInput: ''
   };
 };
+
+/*----------------- Form Actions --------------------------- */
 
