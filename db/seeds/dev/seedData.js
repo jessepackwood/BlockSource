@@ -1,30 +1,36 @@
+const bcrypt = require('bcrypt');
 const projectsData = require('../projectsData');
 const contributorsData = require('../contributorsData');
 const projectsContributorsData = require('../projectsContributorsData');
 
 exports.seed = function (knex, Promise) {
-  // Deletes ALL existing entries
-  return knex("projects_contributors")
-    .del()
+  return knex("projects_contributors").del()
     .then(() => knex("contributors").del())
-    .then(function() {
-      return knex.raw("ALTER SEQUENCE contributors_id_seq RESTART WITH 1");
-    })
     .then(() => knex("projects").del())
-    .then(function() {
-      return knex.raw("ALTER SEQUENCE projects_id_seq RESTART WITH 1");
-    })
     .then(() => {
-      return Promise.all([knex("projects")
+      return knex("projects")
           .insert(projectsData, "id")
-          .then(() => {
-            return knex("contributors").insert(contributorsData, "id");
-          })
-          .then(() => {
-            return knex("projects_contributors").insert(projectsContributorsData);
+          .then((project_ids) => {
+            let hashedContributorsData = [];
+            contributorsData.forEach( contributor => {
+              let hash = bcrypt.hashSync(contributor.password, 10)
+              hashedContributorsData.push(Object.assign({}, contributor, {password: hash}))
+            })
+            return knex("contributors").insert(hashedContributorsData, "id").then((contributor_ids) => {
+              let projectsContributorsWithIDs = [];
+              console.log(project_ids)
+              projectsContributorsData.forEach( (junction, index) => {
+                projectsContributorsWithIDs.push(Object.assign({}, junction, {
+                  projects_id: project_ids[Math.floor(Math.random() * Math.floor(project_ids.length))], 
+                  contributors_id: contributor_ids[Math.floor(Math.random() * Math.floor(contributor_ids.length))]
+                }))
+              })
+              console.log(projectsContributorsWithIDs)
+              return knex("projects_contributors").insert(projectsContributorsWithIDs);
+            });
           })
           .then(() => console.log("Seeding complete!"))
-          .catch(error => console.log(`Error seeding data: ${error}`))]); // end return Promise.all
+          .catch(error => console.log(`Error seeding data: ${error}`));
     })
     .catch(error => console.log(`Error seeding data: ${error}`));
 };
