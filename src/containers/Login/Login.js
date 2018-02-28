@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Login.css';
 import * as actions from '../../actions';
@@ -21,10 +21,13 @@ export class Login extends Component {
   }
 
   submitLogin = () => {
-    this.prop.login(this.state.email, this.state.password)
+    this.props.login(this.state.email, this.state.password)
   }
 
   render() {
+    if(this.props.loggedIn) {
+      return <Redirect to='/' />
+    }
     return (
       <div className='login-page'>
         <div className='login-inputs'>
@@ -52,6 +55,9 @@ export class Login extends Component {
   }
 }
 
+export const mapStateToProps = store => ({
+  loggedIn: store.user.loggedIn
+})
 
 export const mapDispatchToProps = dispatch => {
   return {
@@ -65,4 +71,4 @@ Login.propTypes = {
 
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

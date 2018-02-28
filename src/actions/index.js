@@ -36,36 +36,24 @@ export const postNewProject = (title, description, goal_amount, fund_amount) => 
 
 /*------------------ Login actions --------------------------- */
 
-export const createUser = (email, password) => async (dispatch) => {
-  auth.createUserWithEmailAndPassword(email, password).then((user) => {
-    dispatch(createUserSuccess(user));
-  }).catch((error) => {
-    dispatch(createUserError(error));
-  });
-};
-
-export const createUserSuccess = () => {
-  return {
-    type: 'CREATE_USER_SUCCESS'
-  };
-};
-
-export const createUserError = () => {
-  return {
-    type: 'CREATE_USER_ERROR'
-  };
-};
-
 
 export const login = (email, password) => async (dispatch) => {
   const user = await postLogin(email, password);
-  dispatch(setUser(user))
+  if(user) {
+    dispatch(setUser(user))
+  } 
 }
 
 export const setUser = (user) => {
   return {
     type: "SET_USER",
     user
+  }
+}
+
+export const signOutUser = () => {
+  return {
+    type: 'SIGN_OUT_USER'
   }
 }
 

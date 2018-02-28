@@ -20,7 +20,6 @@ export const fetchProjectContributors = async (id) => {
 };
 
 export const postProject = async (title, description, goal_amount, fund_amount) => {
-  console.log(title, description, goal_amount, fund_amount)
   try {
   const postProject = await fetch('/api/v1/projects', {
     method: 'POST', 
