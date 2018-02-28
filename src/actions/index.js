@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { auth } from '../services/firebase';
-import { fetchStoredProjects, fetchProjectContributors, postProject } from '../services/api';
+import { fetchStoredProjects, fetchProjectContributors, postProject, postLogin } from '../services/api';
 
 
 /*------------------ Fetch Endpoints --------------------------- */
@@ -56,10 +56,16 @@ export const createUserError = () => {
   };
 };
 
-export const inputChange = (name, value) => {
+
+export const login = (email, password) => async (dispatch) => {
+  const user = await postLogin(email, password);
+  dispatch(setUser(user))
+}
+
+export const setUser = (user) => {
   return {
-    type: `LOGIN_${name.toUpperCase()}_CHANGE`,
-    value
+    type: "SET_USER",
+    user
   }
 }
 
