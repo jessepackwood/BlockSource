@@ -53,15 +53,15 @@ export class Projects extends Component {
         <CardText expandable={true}>
                   
         </CardText>
-        <FlatButton label="Add Contibution" onClick={this.handleOpen} />
+        <FlatButton label="Add Contribution" secondary={true} onClick={this.handleOpen} />
         <Dialog
-          title="Dialog With Actions"
+          title={`Contribute to ${project.title}`}
           actions={actions}
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-          The actions in this window were passed in as an array of React objects.
+          Functionality to contribute to projects coming soon
         </Dialog>
       </Card>;
     });
