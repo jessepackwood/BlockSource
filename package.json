@@ -6,7 +6,8 @@
   "scripts": {
     "start-js": "react-scripts start",
     "start": "npm run build && node server.js",
-    "dev": "npm-run-all -p watch-css start-js",
+    "dev": "npm-run-all -p watch-css start-js start-server",
+    "start-server": "PORT=3001 nodemon server.js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "frontTest": "react-scripts test --env=jsdom",
@@ -19,6 +20,7 @@
   "keywords": [],
   "author": "David Ryan, Jesse Packwood",
   "license": "ISC",
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
@@ -39,7 +41,8 @@
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
     "redux-promise": "^0.5.3",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "webpack-dev-server": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
