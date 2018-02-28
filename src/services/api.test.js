@@ -32,7 +32,7 @@ describe('Api Calls tests', () => {
       const newProject = await apiCalls.postProject({project: 'payload'});
       expect(newProject).toEqual({"description": "the best project", "fund_amount": "2000", "goal_amount": "5000", "title": "Project 1"});
     });
-  })
+  });
 
   describe('Contributors fetch test', () => {
     beforeEach(() => {

@@ -12,12 +12,12 @@ export class ProjectForm extends Component {
       description: '',
       goal_amount: '',
       fund_amount: ''
-    }
+    };
   }
 
   handleInputChange = (event) => {
-    const {name, value} = event.target
-    this.setState({ [name] : value})
+    const {name, value} = event.target;
+    this.setState({ [name] : value});
   }
 
   render() {
@@ -68,11 +68,11 @@ export class ProjectForm extends Component {
           color='primary'
           onClick={
             ()=> this.props.formChange(
-                  this.state.title, 
-                  this.state.description, 
-                  this.state.goal_amount, 
-                  this.state.fund_amount
-          )}/>
+              this.state.title, 
+              this.state.description, 
+              this.state.goal_amount, 
+              this.state.fund_amount
+            )}/>
       </div>
     );
   }
@@ -82,9 +82,9 @@ export class ProjectForm extends Component {
 export const mapDispatchToProps = dispatch => {
   return {
     formChange: (title, description, goal_amount, fund_amount) => {
-      dispatch(actions.postNewProject(title, description, goal_amount, fund_amount))
+      dispatch(actions.postNewProject(title, description, goal_amount, fund_amount));
     }
-  }
-}
+  };
+};
 
-export default connect(null, mapDispatchToProps)(ProjectForm)
+export default connect(null, mapDispatchToProps)(ProjectForm);

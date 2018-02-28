@@ -12,73 +12,85 @@ const bcrypt = require('bcrypt');
 
 app.set("port", process.env.PORT || 3000);
 
-passport.use(new Strategy({
-  usernameField: 'email'
-},
-  function(email, password, done) {
-    database('contributors')
-      .where({email})
-      .first()
-      .then(contributor => {
-        if (!contributor) {
-          return done(null, false)
-        }
-        if(!bcrypt.compareSync(password, contributor.password)) {
-          return done(null, false)
-        }
-        return done(null, contributor)
-      })
-      .catch(error => {
-        return done(error)
-      })
-  }
-))
+passport.use(
+  new Strategy(
+    {
+      usernameField: "email"
+    },
+    function(email, password, done) {
+      database("contributors")
+        .where({ email })
+        .first()
+        .then(contributor => {
+          if (!contributor) {
+            return done(null, false);
+          }
+          if (!bcrypt.compareSync(password, contributor.password)) {
+            return done(null, false);
+          }
+          return done(null, contributor);
+        })
+        .catch(error => {
+          return done(error);
+        });
+    }
+  )
+);
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id)
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  database('contributors')
-    .where({id})
+  database("contributors")
+    .where({ id })
     .first()
     .then(user => {
-
-      if(!user) {
-        return done(null, false)
+      if (!user) {
+        return done(null, false);
       }
-      return done(null, user)
+      return done(null, user);
     })
     .catch(error => {
-      done(error)
-    })
-})
+      done(error);
+    });
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(require('express-session')( {secret: 'cryptokitties', resave: false, saveUninitialized: false }));
+app.use(
+  require("express-session")({
+    secret: "cryptokitties",
+    resave: false,
+    saveUninitialized: false
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, "build")));
 
 app.locals.title = "BlockSource";
 
-app.get("/", (request, response) => { 
+app.get("/", (request, response) => {
   response.send("BlockSource!");
 });
 
-app.post("/api/v1/login", passport.authenticate("local"), (request, response) => {
-  const reducedUser = {
-    id: request.user.id,
-    email: request.user.email
+app.post(
+  "/api/v1/login",
+  passport.authenticate("local"),
+  (request, response) => {
+    const reducedUser = {
+      id: request.user.id,
+      email: request.user.email
+    };
+    response.status(200).json(reducedUser);
   }
-  response.status(200).json(reducedUser);
-})
+);
 
 app.post("/api/v1/logout", (request, response) => {
   request.logout();
-  response.redirect('/')
-})
+  response.redirect("/");
+});
 
 app.get("/api/v1/contributors/:id", (request, response) => {
   const { id } = request.params;
@@ -191,16 +203,14 @@ app.get("/api/v1/projects/:id/contributors", (request, response) => {
     });
 });
 
-
 const checkUser = (request, response, next) => {
-  if(request.isAuthenticated()) {
-    return next()
+  if (request.isAuthenticated()) {
+    return next();
   }
-  return response.status(401).json({error: 'Unauthorized'})
-}
+  return response.status(401).json({ error: "Unauthorized" });
+};
 
 app.post("/api/v1/projects", checkUser, (request, response) => {
-
   const project = request.body;
 
   for (const requiredParams of [
@@ -222,9 +232,7 @@ app.post("/api/v1/projects", checkUser, (request, response) => {
     .catch(error => response.status(404).json({ error }));
 });
 
-
 app.post("/api/v1/contributors", (request, response) => {
-
   const contributor = request.body;
 
   for (const requiredParams of ["name", "bio"]) {
@@ -240,7 +248,6 @@ app.post("/api/v1/contributors", (request, response) => {
     .then(project => response.status(201).json({ id: project[0] }))
     .catch(error => response.status(404).json({ error }));
 });
-
 
 app.post("/api/v1/projects_contributors/project/", (request, response) => {
   const junction = request.body;
