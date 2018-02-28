@@ -32,5 +32,22 @@ export const postProject = async (title, description, goal_amount, fund_amount) 
   const project = await postProject.json()
   return project
   } catch (error) {
+    return error
+  }
+}
+
+export const postLogin = async (email, password) => {
+  try {
+    const postUser = await fetch('/api/v1/login', {
+      method: 'POST',
+      body: JSON.stringify({email, password}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const user = await postUser.json()
+    return user
+  } catch (error) {
+    return null
   }
 }
