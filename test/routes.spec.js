@@ -106,16 +106,6 @@ describe("API Routes", () => {
     });
   });
 
-  //   "id": 1,
-  // "name": "Jesse",
-  // "bio": "Daredevil, Photographer, Programmer",
-  // "created_at": "2018-02-26T22:02:12.770Z",
-  // "updated_at": "2018-02-26T22:02:12.770Z",
-  // "projects_id": 1,
-  // "contributors_id": 1,
-  // "owner": true,
-  // "contribution_amount": 0
-
   describe("GET api/v1/projects/:id/contributors", () => {
     it("should return all contributors on a project", () => {
       return chai
@@ -161,17 +151,6 @@ describe("API Routes", () => {
     });
   });
 
-  // "id": 1,
-  //       "title": "Black Project",
-  //       "goal_amount": 50000,
-  //       "fund_amount": 20000,
-  //       "description": "Really really black, like so black it kills you",
-  //       "created_at": "2018-02-26T22:02:12.770Z",
-  //       "updated_at": "2018-02-26T22:02:12.770Z",
-  //       "projects_id": 1,
-  //       "contributors_id": 1,
-  //       "owner": true,
-  //       "contribution_amount": 0
   describe("GET api/v1/contributors/:id/projects", () => {
     it("should return all projects for a contributor", () => {
       return chai
@@ -249,6 +228,66 @@ describe("API Routes", () => {
         .send({ contribution_amount: "5000.0" })
         .then(response => {
           response.should.have.status(422);
+        })
+        .catch(error => {
+          throw error;
+        });
+    });
+  });
+
+  describe("PATCH api/v1/projects/:id", () => {
+    it("should edit one project description", () => {
+      return chai
+        .request(server)
+        .patch("/api/v1/projects/1")
+        .send({ description: "This should work!" })
+        .then(response => {
+          response.should.have.status(200);
+          response.should.be.a("object");
+        })
+        .catch(error => {
+          throw error;
+        });
+    });
+
+    it("should return a 404 if the wallet is not found", () => {
+      return chai
+        .request(server)
+        .patch("/api/v1/projects/300")
+        .send({ description: "This should not work" })
+        .then(response => {
+          response.should.have.status(404);
+          response.should.be.a("object");
+        })
+        .catch(error => {
+          throw error;
+        });
+    });
+  });
+  
+  describe("PATCH api/v1/contributors/:id", () => {
+    it("should edit one contributor bio", () => {
+      return chai
+        .request(server)
+        .patch("/api/v1/contributors/1")
+        .send({ bio: "Not the same bio as before." })
+        .then(response => {
+          response.should.have.status(200);
+          response.should.be.a("object");
+        })
+        .catch(error => {
+          throw error;
+        });
+    });
+
+    it("should return a 404 if the wallet is not found", () => {
+      return chai
+        .request(server)
+        .patch("/api/v1/contributors/250")
+        .send({ bio: "This patch shouldn't work" })
+        .then(response => {
+          response.should.have.status(404);
+          response.should.be.a("object");
         })
         .catch(error => {
           throw error;
