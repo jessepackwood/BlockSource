@@ -14,7 +14,7 @@ database:
 
 test:
   override:
-    - npm test
+    - mocha --exit
     - npm run eslint
 
 deployment:
