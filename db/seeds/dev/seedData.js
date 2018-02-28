@@ -1,5 +1,4 @@
 /*eslint camelcase: ["error", {properties: "never"}]*/
-
 const bcrypt = require("bcrypt");
 const projectsData = require("../projectsData");
 const contributorsData = require("../contributorsData");

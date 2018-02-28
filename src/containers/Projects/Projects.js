@@ -9,6 +9,7 @@ import Dialog from 'material-ui/Dialog';
 export class Projects extends Component {
   state = {
     open: false,
+
   };
 
   handleOpen = () => {
@@ -23,9 +24,16 @@ export class Projects extends Component {
     this.props.handleProjectsFetch();
   }
 
+  checkContributors() {
+    if (!this.props.contributors) {
+      return <p>Nobody has backed this project</p>
+    } else {
+    this.props.contributors.map(contributor => <p>{contributor.name}</p>)
+    }
+  }
 
   mapProjects() {
-        const actions = [
+    const actions = [
       <FlatButton
         label="Cancel"
         primary={true}
@@ -38,8 +46,9 @@ export class Projects extends Component {
         onClick={this.handleClose}
       />,
     ];
+
     return this.props.projects.map( (project, index) => {
-      return <Card key={index}>
+      return <Card key={project.id}>
         <CardHeader
           title={project.title}
           subtitle={`Goal Amount: ${project.goal_amount} Fund Amount: ${project.fund_amount}`}
@@ -51,7 +60,8 @@ export class Projects extends Component {
           <FlatButton label="Contributors" primary={true} onClick={() => this.props.showContributors(project.id)}/>
         </CardActions>
         <CardText expandable={true}>
-                  
+        
+          {!!this.props.contributors.length ? this.props.contributors.map(contributor => <p>{contributor.name}</p>) : <p>Nobody has backed this project</p>}    
         </CardText>
         <FlatButton label="Add Contribution" secondary={true} onClick={this.handleOpen} />
         <Dialog
@@ -61,7 +71,6 @@ export class Projects extends Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-          Functionality to contribute to projects coming soon
         </Dialog>
       </Card>;
     });
