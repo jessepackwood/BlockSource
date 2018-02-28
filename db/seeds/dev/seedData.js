@@ -1,9 +1,11 @@
+/*eslint camelcase: ["error", {properties: "never"}]*/
+
 const bcrypt = require("bcrypt");
 const projectsData = require("../projectsData");
 const contributorsData = require("../contributorsData");
 const projectsContributorsData = require("../projectsContributorsData");
 
-exports.seed = function(knex, Promise) {
+exports.seed = function(knex) {
   return knex("projects_contributors")
     .del()
     .then(() => knex("contributors").del())
@@ -11,7 +13,7 @@ exports.seed = function(knex, Promise) {
     .then(() => {
       return knex("projects")
         .insert(projectsData, "id")
-        .then(project_ids => {
+        .then(projectsIds => {
           let hashedContributorsData = [];
           contributorsData.forEach(contributor => {
             let hash = bcrypt.hashSync(contributor.password, 10);
@@ -21,22 +23,22 @@ exports.seed = function(knex, Promise) {
           });
           return knex("contributors")
             .insert(hashedContributorsData, "id")
-            .then(contributor_ids => {
+            .then(contributorsIds => {
               let projectsContributorsWithIDs = [];
-              console.log(project_ids);
-              projectsContributorsData.forEach((junction, index) => {
+              console.log(projectsIds);
+              projectsContributorsData.forEach((junction) => {
                 projectsContributorsWithIDs.push(
                   Object.assign({}, junction, {
                     projects_id:
-                      project_ids[
+                      projectsIds[
                         Math.floor(
-                          Math.random() * Math.floor(project_ids.length)
+                          Math.random() * Math.floor(projectsIds.length)
                         )
                       ],
                     contributors_id:
-                      contributor_ids[
+                      contributorsIds[
                         Math.floor(
-                          Math.random() * Math.floor(contributor_ids.length)
+                          Math.random() * Math.floor(contributorsIds.length)
                         )
                       ]
                   })
