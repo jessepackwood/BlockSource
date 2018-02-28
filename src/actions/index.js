@@ -32,30 +32,30 @@ export const setProjectContributors = (contributors) => {
 export const postNewProject = (title, description, goal_amount, fund_amount) => async (dispatch) => {
   const id = await postProject(title, description, goal_amount, fund_amount);
 
-}
+};
 
 /*------------------ User actions --------------------------- */
 
 
 export const login = (email, password) => async (dispatch) => {
   const user = await postLogin(email, password);
-  if(user) {
-    dispatch(setUser(user))
+  if (user) {
+    dispatch(setUser(user));
   } 
-}
+};
 
 export const setUser = (user) => {
   return {
     type: "SET_USER",
     user
-  }
-}
+  };
+};
 
 export const signOutUser = () => {
   return {
     type: 'SIGN_OUT_USER'
-  }
-}
+  };
+};
 
 export const createUser = () => {
   return {

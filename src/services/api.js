@@ -34,8 +34,10 @@ export const postProject = async (title, description, goal_amount, fund_amount) 
   } catch (error) {
     console.log(error)
     return error
+
+
   }
-}
+};
 
 export const postLogin = async (email, password) => {
   try {
@@ -46,10 +48,10 @@ export const postLogin = async (email, password) => {
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-    const user = await postUser.json()
-    return user
+    });
+    const user = await postUser.json();
+    return user;
   } catch (error) {
-    return null
+    return null;
   }
-}
+};

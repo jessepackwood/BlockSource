@@ -1,10 +1,11 @@
-const bcrypt = require('bcrypt');
-const projectsData = require('../projectsData');
-const contributorsData = require('../contributorsData');
-const projectsContributorsData = require('../projectsContributorsData');
+const bcrypt = require("bcrypt");
+const projectsData = require("../projectsData");
+const contributorsData = require("../contributorsData");
+const projectsContributorsData = require("../projectsContributorsData");
 
-exports.seed = function (knex, Promise) {
-  return knex("projects_contributors").del()
+exports.seed = function(knex, Promise) {
+  return knex("projects_contributors")
+    .del()
     .then(() => knex("contributors").del())
     .then(() => knex("projects").del())
     .then(() => {
