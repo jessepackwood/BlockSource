@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Login.css';
 import * as actions from '../../actions';
@@ -7,13 +7,27 @@ import PropTypes from 'prop-types';
 
 
 export class Login extends Component {
+  constructor() {
+    super()
+    this.state = {
+      email: '',
+      password: ''
+    }
+  }
 
   handleInputChange = (event) => {
     const {name, value} = event.target;
-    this.props.inputChange(name, value);
+    this.setState({ [name] : value})
+  }
+
+  submitLogin = () => {
+    this.props.login(this.state.email, this.state.password)
   }
 
   render() {
+    if(this.props.loggedIn) {
+      return <Redirect to='/' />
+    }
     return (
       <div className='login-page'>
         <div className='login-inputs'>
@@ -22,16 +36,18 @@ export class Login extends Component {
             name='email'
             className='input-field'
             placeholder='Email'
-            value={this.props.email || ''}
+            value={this.state.email}
+            onChange={this.handleInputChange}
           />
           <input
             type='password'
             name='password'
             className='input-field'
             placeholder='Password'
-            value={this.props.password || ''}
+            value={this.state.password}
+            onChange={this.handleInputChange}
           />
-          <button className='btn-sign-in'>Sign In</button>
+          <button className='btn-sign-in' onClick={this.submitLogin}>Sign In</button>
         </div>
 
       </div>
@@ -39,24 +55,20 @@ export class Login extends Component {
   }
 }
 
-export const mapStateToProps = store => {
-  return {
-    email: store.email,
-    password: store.password
-  };
-};
+export const mapStateToProps = store => ({
+  loggedIn: store.user.loggedIn
+})
 
 export const mapDispatchToProps = dispatch => {
   return {
-    inputChange: (name, value) => {
-      dispatch(actions.inputChange(name, value));
+    login: (email, password) => {
+      dispatch(actions.login(email, password));
     }
   };
 };
 
 Login.propTypes = {
-  email: PropTypes.string,
-  password: PropTypes.string
+
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

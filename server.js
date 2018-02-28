@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const environment = process.env.NODE_ENV || "development";
 const configuration = require("./knexfile")[environment];
 const database = require("knex")(configuration);
+const bcrypt = require('bcrypt');
+
 
 app.set("port", process.env.PORT || 3000);
 
@@ -23,7 +25,7 @@ passport.use(new Strategy({
         }
         if(!bcrypt.compareSync(password, contributor.password)) {
           return done(null, false)
-        } 
+        }
         return done(null, contributor)
       })
       .catch(error => {
@@ -32,8 +34,31 @@ passport.use(new Strategy({
   }
 ))
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id)
+});
+
+passport.deserializeUser(function(id, done) {
+  database('contributors')
+    .where({id})
+    .first()
+    .then(user => {
+
+      if(!user) {
+        return done(null, false)
+      }
+      return done(null, user)
+    })
+    .catch(error => {
+      done(error)
+    })
+})
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(require('express-session')( {secret: 'cryptokitties', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.locals.title = "BlockSource";
@@ -41,6 +66,19 @@ app.locals.title = "BlockSource";
 app.get("/", (request, response) => { 
   response.send("BlockSource!");
 });
+
+app.post("/api/v1/login", passport.authenticate("local"), (request, response) => {
+  const reducedUser = {
+    id: request.user.id,
+    email: request.user.email
+  }
+  response.status(200).json(reducedUser);
+})
+
+app.post("/api/v1/logout", (request, response) => {
+  request.logout();
+  response.redirect('/')
+})
 
 app.get("/api/v1/contributors/:id", (request, response) => {
   const { id } = request.params;
@@ -142,7 +180,6 @@ app.get("/api/v1/projects/:id/contributors", (request, response) => {
     .where("projects_contributors.projects_id", id)
     .select()
     .then(contributors => {
-      console.log(contributors);
       if (!contributors[0]) {
         response.status(404).json({ error: "Not Found" });
       } else {
@@ -155,7 +192,14 @@ app.get("/api/v1/projects/:id/contributors", (request, response) => {
 });
 
 
-app.post("/api/v1/projects", (request, response) => {
+const checkUser = (request, response, next) => {
+  if(request.isAuthenticated()) {
+    return next()
+  }
+  return response.status(401).json({error: 'Unauthorized'})
+}
+
+app.post("/api/v1/projects", checkUser, (request, response) => {
 
   const project = request.body;
 
@@ -197,9 +241,6 @@ app.post("/api/v1/contributors", (request, response) => {
     .catch(error => response.status(404).json({ error }));
 });
 
-app.post("/api/v1/login", passport.authenticate("local", () => {
-  console.log(arguments)
-}))
 
 app.post("/api/v1/projects_contributors/project/", (request, response) => {
   const junction = request.body;

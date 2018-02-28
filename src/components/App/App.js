@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../../containers/Header/Header';
-import Routes from '../Routes/Routes';
+import Routes from '../../containers/Routes/Routes';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';

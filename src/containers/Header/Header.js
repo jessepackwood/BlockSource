@@ -5,6 +5,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './Header.css';
 
 export class Header extends Component {
+
+  
+  
   render() {
     return (
       <MuiThemeProvider>
@@ -21,6 +24,7 @@ export class Header extends Component {
             <Link to ='/login' >
               <button className='button btn-login'>Sign in</button>
             </Link>
+              <button className='button btn-sign-out' >Log Out</button>
           </div>
         </div>
       </MuiThemeProvider>

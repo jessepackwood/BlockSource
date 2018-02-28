@@ -16,9 +16,7 @@ export class ProjectForm extends Component {
   }
 
   handleInputChange = (event) => {
-    console.log('input change')
     const {name, value} = event.target
-    console.log(name, value)
     this.setState({ [name] : value})
   }
 
