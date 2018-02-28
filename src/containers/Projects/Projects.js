@@ -4,14 +4,40 @@ import './Projects.css';
 import { connect } from 'react-redux';
 import { projectsEndpoint, contributorsEndpoint } from '../../actions';
 import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 
 export class Projects extends Component {
+  state = {
+    open: false,
+  };
+
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };
+
   componentDidMount() {
     this.props.handleProjectsFetch();
   }
 
+
   mapProjects() {
-    // const contributors = this.props.contributors.length ? <p>{this.props.contributors}</p> : null;
+        const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleClose}
+      />,
+    ];
     return this.props.projects.map( (project, index) => {
       return <Card key={index}>
         <CardHeader
@@ -22,11 +48,21 @@ export class Projects extends Component {
           {project.description}
         </CardText>
         <CardActions actAsExpander={true}>
-          <FlatButton label="Contributors" onClick={() => this.props.showContributors(project.id)}/>
+          <FlatButton label="Contributors" primary={true} onClick={() => this.props.showContributors(project.id)}/>
         </CardActions>
         <CardText expandable={true}>
                   
         </CardText>
+        <FlatButton label="Add Contibution" onClick={this.handleOpen} />
+        <Dialog
+          title="Dialog With Actions"
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+        >
+          The actions in this window were passed in as an array of React objects.
+        </Dialog>
       </Card>;
     });
   }

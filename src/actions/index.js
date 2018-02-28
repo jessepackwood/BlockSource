@@ -29,12 +29,12 @@ export const setProjectContributors = (contributors) => {
   };
 };
 
-export const postNewProject = (title, description, goal_amount, fund_amount) => {
-  postProject(title, description, goal_amount, fund_amount);
+export const postNewProject = (title, description, goal_amount, fund_amount) => async (dispatch) => {
+  const id = await postProject(title, description, goal_amount, fund_amount);
 
 }
 
-/*------------------ Login actions --------------------------- */
+/*------------------ User actions --------------------------- */
 
 
 export const login = (email, password) => async (dispatch) => {
@@ -54,6 +54,18 @@ export const setUser = (user) => {
 export const signOutUser = () => {
   return {
     type: 'SIGN_OUT_USER'
+  }
+}
+
+export const createUser = () => {
+  return {
+    type: 'CREATE_USER'
+  }
+}
+
+export const createUserError = () => {
+  return {
+    type: 'CREATE_USER_ERROR'
   }
 }
 

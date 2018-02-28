@@ -5,19 +5,19 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Unknown
-    inputChange={[Function]}
+    inputChange={[MockFunction]}
     projects={
-        Array [
-            Object {
-              "title": "hoverboard",
-            },
-            Object {
-              "title": "flying cars",
-            },
-          ]
+      Array [
+        Object {
+          "title": "hoverboard",
+        },
+        Object {
+          "title": "flying cars",
+        },
+      ]
     }
     searchInput="hoverboard"
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -35,7 +35,7 @@ ShallowWrapper {
         onChange={[Function]}
         placeholder="Search"
         type="text"
-/>,
+      />,
       "className": "search-wrapper",
     },
     "ref": null,
@@ -66,7 +66,7 @@ ShallowWrapper {
           onChange={[Function]}
           placeholder="Search"
           type="text"
-/>,
+        />,
         "className": "search-wrapper",
       },
       "ref": null,
