@@ -19,12 +19,12 @@ exports.seed = function(knex) {
             let hash = bcrypt.hashSync(contributor.password, 10)
             hashedContributorsData.push(Object.assign({}, contributor, {password: hash}))
           })
-          return knex("contributors").insert(hashedContributorsData, "id").then((contributor_ids) => {
+          return knex("contributors").insert(hashedContributorsData, "id").then((contributorIds) => {
             let projectsContributorsWithIDs = [];
             projectsContributorsData.forEach( (junction, index) => {
               projectsContributorsWithIDs.push(Object.assign({}, junction, {
-                projects_id: project_ids[Math.floor(Math.random() * Math.floor(project_ids.length))], 
-                contributors_id: contributor_ids[Math.floor(Math.random() * Math.floor(contributor_ids.length))]
+                projects_id: projectsIds[Math.floor(Math.random() * Math.floor(projectsIds.length))], 
+                contributors_id: contributorIds[Math.floor(Math.random() * Math.floor(contributorIds.length))]
               }))
             })
             return knex("projects_contributors").insert(projectsContributorsWithIDs);
@@ -33,7 +33,6 @@ exports.seed = function(knex) {
             .insert(hashedContributorsData, "id")
             .then(contributorsIds => {
               let projectsContributorsWithIDs = [];
-              console.log(projectsIds);
               projectsContributorsData.forEach((junction) => {
                 projectsContributorsWithIDs.push(
                   Object.assign({}, junction, {
@@ -52,7 +51,6 @@ exports.seed = function(knex) {
                   })
                 );
               });
-              console.log(projectsContributorsWithIDs);
               return knex("projects_contributors").insert(
                 projectsContributorsWithIDs
               );
