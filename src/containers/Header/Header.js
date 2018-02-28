@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../Search/Search';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import './Header.css';
 
 export class Header extends Component {
