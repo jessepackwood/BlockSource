@@ -7,15 +7,15 @@ const environment = process.env.NODE_ENV || "development";
 const configuration = require("./knexfile")[environment];
 const database = require("knex")(configuration);
 
-app.set("port", process.env.PORT || 5000);
+app.set("port", process.env.PORT || 3000);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/", express.static(`${__dirname}/client/build`));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.locals.title = "BlockSource";
 
-app.get("/", (request, response) => {
+app.get("/", (request, response) => { 
   response.send("BlockSource!");
 });
 
