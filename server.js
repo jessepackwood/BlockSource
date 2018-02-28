@@ -192,7 +192,14 @@ app.get("/api/v1/projects/:id/contributors", (request, response) => {
 });
 
 
-app.post("/api/v1/projects", (request, response) => {
+const checkUser = (request, response, next) => {
+  if(request.isAuthenticated()) {
+    return next()
+  }
+  return response.status(401).json({error: 'Unauthorized'})
+}
+
+app.post("/api/v1/projects", checkUser, (request, response) => {
 
   const project = request.body;
 
