@@ -63,7 +63,7 @@ export class Projects extends Component {
         
           {!!this.props.contributors.length ? this.props.contributors.map(contributor => <p>{contributor.name}</p>) : <p>Nobody has backed this project</p>}    
         </CardText>
-        <FlatButton label="Add Contribution" secondary={true} onClick={this.handleOpen} />
+        <FlatButton label="Add Contribution" onClick={this.handleOpen} />
         <Dialog
           title={`Contribute to ${project.title}`}
           actions={actions}
