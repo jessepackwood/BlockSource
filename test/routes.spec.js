@@ -49,11 +49,9 @@ describe("API Routes", () => {
           response.body.length.should.equal(30);
           response.res.should.be.a("object");
           response.body[0].should.have.property("title");
-          response.body[0].title.should.equal("Black Project");
+          response.body[0].title.should.equal("Angle Razor - a straight razor for the 21st Century");
           response.body[0].should.have.property("description");
-          response.body[0].description.should.equal(
-            "Really really black, like so black it kills you"
-          );
+          response.body[0].description.should.equal("Improve your shaving experience with this beautifully minimal tool, compatible with low-cost blades available worldwide.");
           response.body[0].should.have.property("goal_amount");
           response.body[0].goal_amount.should.equal(50000.0);
           response.body[0].should.have.property("fund_amount");
@@ -75,11 +73,9 @@ describe("API Routes", () => {
           response.should.be.json;
           response.body.should.be.a("object");
           response.body.should.have.property("title");
-          response.body.title.should.equal("Black Project");
+          response.body.title.should.equal("Angle Razor - a straight razor for the 21st Century");
           response.body.should.have.property("description");
-          response.body.description.should.equal(
-            "Really really black, like so black it kills you"
-          );
+          response.body.description.should.equal("Improve your shaving experience with this beautifully minimal tool, compatible with low-cost blades available worldwide.");
           response.body.should.have.property("goal_amount");
           response.body.goal_amount.should.equal(50000.0);
           response.body.should.have.property("fund_amount");
@@ -162,11 +158,9 @@ describe("API Routes", () => {
           response.body.should.be.a("array");
           response.body[0].should.be.a("object");
           response.body[0].should.have.property("title");
-          response.body[0].title.should.equal("Black Project");
+          response.body[0].title.should.equal("Angle Razor - a straight razor for the 21st Century");
           response.body[0].should.have.property("description");
-          response.body[0].description.should.equal(
-            "Really really black, like so black it kills you"
-          );
+          response.body[0].description.should.equal("Improve your shaving experience with this beautifully minimal tool, compatible with low-cost blades available worldwide.");
           response.body[0].should.have.property("goal_amount");
           response.body[0].goal_amount.should.equal(50000.0);
           response.body[0].should.have.property("fund_amount");

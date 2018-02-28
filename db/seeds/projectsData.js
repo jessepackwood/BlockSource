@@ -1,3 +1,6 @@
+/*eslint max-len: ["error", { "ignoreStrings": true }]*/
+/*eslint camelcase: ["error", {properties: "never"}]*/
+
 // projectsData.js
 
 module.exports = [
