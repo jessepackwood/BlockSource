@@ -20,15 +20,14 @@ describe("Client Routes", () => {
       });
   });
 
-  it.skip("should return a 404 if the page is not found", () => {
-    return chai
-      .request(server)
-      .get("/sad")
-      .then(response => {
-        console.log(response);
-        response.should.have.status(404);
-      });
+  it('should return a 404 if the page is not found', () => {
+    return chai.request(server)
+    .get('/sad')
+    .then(response => {
+      response.should.have.status(404);
+    });
   });
+
 });
 
 describe("API Routes", () => {
@@ -154,7 +153,6 @@ describe("API Routes", () => {
         .then(response => {
           response.should.have.status(404);
           response.should.be.json;
-          response.body.should.be.a("array");
           response.body.error.should.equal("Not Found");
         })
         .catch(error => {
@@ -215,7 +213,6 @@ describe("API Routes", () => {
         .then(response => {
           response.should.have.status(404);
           response.should.be.json;
-          response.body.should.be.a("array");
           response.body.error.should.equal("Not Found");
         })
         .catch(error => {
