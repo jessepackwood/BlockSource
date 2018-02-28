@@ -10,7 +10,7 @@
     "start-server": "PORT=3001 nodemon server.js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
-    "frontTest": "react-scripts test",
+    "frontTest": "react-scripts test --env=jsdom",
     "backTest": "mocha --exit",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",

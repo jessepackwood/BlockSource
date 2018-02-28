@@ -11,12 +11,13 @@ database:
   override:
     - sudo -u postgres psql -p 5432 -c "create database blocksource_test;"
     - knex migrate:latest
+    - knex seed:run
 
 test:
   override:
     - mocha --exit
     - npm run eslint
-
+    
 deployment:
   staging:
     branch: master
