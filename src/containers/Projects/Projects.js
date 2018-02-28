@@ -9,7 +9,6 @@ import Dialog from 'material-ui/Dialog';
 export class Projects extends Component {
   state = {
     open: false,
-
   };
 
   handleOpen = () => {
@@ -97,7 +96,6 @@ export const mapDispatchToProps = (dispatch) => {
       dispatch(projectsEndpoint());
     },
     showContributors: (id) => {
-
       dispatch(contributorsEndpoint(id));
     }
   };
