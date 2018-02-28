@@ -1,5 +1,6 @@
-var Migrations = artifacts.require("./Migrations.sol");
+var Campaign = artifacts.require("../contracts/Campaign.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Migrations);
+  // deployment steps
+  deployer.deploy(Campaign);
 };
