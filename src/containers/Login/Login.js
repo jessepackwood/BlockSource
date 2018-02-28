@@ -8,25 +8,25 @@ import PropTypes from 'prop-types';
 
 export class Login extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       email: '',
       password: ''
-    }
+    };
   }
 
   handleInputChange = (event) => {
     const {name, value} = event.target;
-    this.setState({ [name] : value})
+    this.setState({ [name] : value});
   }
 
   submitLogin = () => {
-    this.props.login(this.state.email, this.state.password)
+    this.props.login(this.state.email, this.state.password);
   }
 
   render() {
-    if(this.props.loggedIn) {
-      return <Redirect to='/' />
+    if (this.props.loggedIn) {
+      return <Redirect to='/' />;
     }
     return (
       <div className='login-page'>
@@ -57,7 +57,7 @@ export class Login extends Component {
 
 export const mapStateToProps = store => ({
   loggedIn: store.user.loggedIn
-})
+});
 
 export const mapDispatchToProps = dispatch => {
   return {

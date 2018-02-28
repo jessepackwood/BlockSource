@@ -20,14 +20,14 @@ describe("Client Routes", () => {
       });
   });
 
-  it('should return a 404 if the page is not found', () => {
-    return chai.request(server)
-    .get('/sad')
-    .then(response => {
-      response.should.have.status(404);
-    });
+  it("should return a 404 if the page is not found", () => {
+    return chai
+      .request(server)
+      .get("/sad")
+      .then(response => {
+        response.should.have.status(404);
+      });
   });
-
 });
 
 describe("API Routes", () => {
@@ -264,7 +264,7 @@ describe("API Routes", () => {
         });
     });
   });
-  
+
   describe("PATCH api/v1/contributors/:id", () => {
     it("should edit one contributor bio", () => {
       return chai

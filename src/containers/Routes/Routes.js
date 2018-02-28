@@ -17,7 +17,7 @@ export class Routes extends Component {
           <Redirect to='/login' />
         )
       ) }/>
-    )
+    );
 
     return (
       <div>
@@ -39,7 +39,7 @@ export class Routes extends Component {
 
 export const mapStateToProps = store => ({
   user: store.user
-})
+});
 
 
 // Route.propTypes = {
