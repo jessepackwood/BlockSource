@@ -1,5 +1,6 @@
 const express = require("express");
-
+const passport = require('passport');
+const Strategy = require('passport-local').Strategy;
 const app = express();
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -8,6 +9,28 @@ const configuration = require("./knexfile")[environment];
 const database = require("knex")(configuration);
 
 app.set("port", process.env.PORT || 3000);
+
+passport.use(new Strategy({
+  usernameField: 'email'
+},
+  function(email, password, done) {
+    database('contributors')
+      .where({email})
+      .first()
+      .then(contributor => {
+        if (!contributor) {
+          return done(null, false)
+        }
+        if(!bcrypt.compareSync(password, contributor.password)) {
+          return done(null, false)
+        } 
+        return done(null, contributor)
+      })
+      .catch(error => {
+        return done(error)
+      })
+  }
+))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -173,6 +196,10 @@ app.post("/api/v1/contributors", (request, response) => {
     .then(project => response.status(201).json({ id: project[0] }))
     .catch(error => response.status(404).json({ error }));
 });
+
+app.post("/api/v1/login", passport.authenticate("local", () => {
+  console.log(arguments)
+}))
 
 app.post("/api/v1/projects_contributors/project/", (request, response) => {
   const junction = request.body;
